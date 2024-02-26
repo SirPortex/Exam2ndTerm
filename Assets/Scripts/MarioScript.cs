@@ -57,6 +57,11 @@ public class MarioScript : MonoBehaviour
         {
             Instantiate(fireworkPrefab, transform.position, Quaternion.identity);
         }
+        
+        if (Input.GetMouseButtonDown(1))
+        {
+            print("ClickDerecho");
+        }
 
         #region ANIMACIONES
         // ANIMACIONES (PROXIMA DIA ORGANIZARLO EN OTRO SCRIPT)

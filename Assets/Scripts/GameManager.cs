@@ -60,6 +60,18 @@ public class GameManager : MonoBehaviour
         points = value;
     }
 
+    //getter
+    public int GetFireWorks()
+    {
+        return fireworks;
+    }
+
+    //setter
+    public void SetFireWorks(int value)
+    {
+        fireworks = value;
+    }
+
     // callback ---> funcion que se va a llamar en el onclick() de los botones
     public void LoadScene(string sceneName)
     {
