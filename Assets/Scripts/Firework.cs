@@ -22,11 +22,17 @@ public class Firework : MonoBehaviour
         _rend = GetComponent<SpriteRenderer>();
 
         GameManager.instance.SetFireWorks(GameManager.instance.GetFireWorks()+1);
+
+        _rb.velocity = _dir * force; //fuerza inicial, primer fuego
+
+        _rend.color = Random.ColorHSV(); // color aleatorio
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        
+        //_rb.velocity = _dir * force;
+        Destroy(gameObject, Random.Range(minTimeToExplode, maxTimeToExplode)); // destruccion en tiempo aleatorio dentro del rango establecido 
     }
 }
