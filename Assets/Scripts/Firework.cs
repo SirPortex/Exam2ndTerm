@@ -18,6 +18,8 @@ public class Firework : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentTime = 0;
+
         _rb = GetComponent<Rigidbody2D>();
         _rend = GetComponent<SpriteRenderer>();
 
@@ -27,12 +29,26 @@ public class Firework : MonoBehaviour
 
         _rend.color = Random.ColorHSV(); // color aleatorio
 
+        timeToExplode = Random.Range(minTimeToExplode, maxTimeToExplode); // destruccion en tiempo aleatorio dentro del rango establecido ss
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        currentTime += Time.fixedDeltaTime;
+
+        if (currentTime > timeToExplode)
+        {
+            print("FUEGOSS!!!");
+            Instantiate(fireworkPrefab);
+            Destroy(gameObject, timeToExplode);
+        }
+
         //_rb.velocity = _dir * force;
-        Destroy(gameObject, Random.Range(minTimeToExplode, maxTimeToExplode)); // destruccion en tiempo aleatorio dentro del rango establecido 
+
+        Destroy(gameObject, Random.Range(minTimeToExplode, maxTimeToExplode)); // destruccion en tiempo aleatorio dentro del rango establecido ss
+
+
     }
 }
