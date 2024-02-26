@@ -12,11 +12,15 @@ public class MarioScript : MonoBehaviour
     public AudioClip jumpClip;
     public GameObject fireworkPrefab;
 
+    public int maxJumps = 2; //maximos saltos, se puede modificar desde el editor.
+
     private Rigidbody2D rb;
     private SpriteRenderer _rend;
     private Animator _animator;
     private Vector2 dir;
     private bool _intentionToJump;
+
+    private int currentJumps = 0; // Saltos iniciales.
 
     // Start is called before the first frame update
     void Start()
@@ -79,14 +83,15 @@ public class MarioScript : MonoBehaviour
         rb.velocity = nVel;
 
 
-        if (_intentionToJump && grnd)
+        if (_intentionToJump && (IsGrounded() || currentJumps < maxJumps))
         {
-            _animator.Play("jumpAnimation");
+            //_animator.Play("jumpAnimation");
             AddJumpForce();
+            currentJumps++; //Suma uno a la variable (+1).
         }
         _intentionToJump = false;
 
-        _animator.SetBool("isGrounded", grnd);
+        //_animator.SetBool("isGrounded", grnd);
     }
 
     public void AddJumpForce()
@@ -101,6 +106,7 @@ public class MarioScript : MonoBehaviour
         RaycastHit2D collision = Physics2D.Raycast(transform.position, Vector2.down, rayDistance, groundMask);
         if (collision)
         {
+            currentJumps = 0;
             return true;
         }
         return false;
